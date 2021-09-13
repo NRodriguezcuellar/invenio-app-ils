@@ -138,6 +138,7 @@ def test_notifications_db_table_and_endpoint(users, client, json_headers):
         "recipients": ["patron1@test.com"],
         "is_manually_triggered": True,
         "message_id": "1",
+        "patron_id": "1",
     }
     exc = "An error occurred."
     log_successful_notification(None, data)

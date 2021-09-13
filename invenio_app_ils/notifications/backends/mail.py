@@ -37,4 +37,3 @@ def get_recipients(patrons):
     if current_app.config["ILS_MAIL_ENABLE_TEST_RECIPIENTS"]:
         return current_app.config["ILS_MAIL_NOTIFY_TEST_RECIPIENTS"]
     return [patron["email"] for patron in patrons]
-

@@ -23,6 +23,7 @@ from .api import (
     BORROWING_REQUEST_PID_TYPE,
     BorrowingRequest,
 )
+from .notifications.api import ill_notifications_filter
 from .search import BorrowingRequestsSearch
 
 ###############################################################################
@@ -40,7 +41,7 @@ ILS_NOTIFICATIONS_MSG_BUILDER_ILL = "invenio_app_ils.ill.notifications.api:notif
 # Override default templates
 ILS_NOTIFICATIONS_TEMPLATES_ILL = {}
 # Function to select and filter which notifications should be sent
-ILS_NOTIFICATIONS_FILTER_ILL = lambda *args, **kwargs: True
+ILS_NOTIFICATIONS_FILTER_ILL = ill_notifications_filter
 
 ###############################################################################
 # RECORDS REST

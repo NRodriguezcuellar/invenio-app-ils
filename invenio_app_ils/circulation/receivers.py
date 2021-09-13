@@ -10,7 +10,9 @@
 from invenio_circulation.proxies import current_circulation
 from invenio_circulation.signals import loan_replace_item, loan_state_changed
 
-from invenio_app_ils.circulation.mail.tasks import send_loan_mail
+from invenio_app_ils.circulation.notifications.api import (
+    send_loan_notification,
+)
 from invenio_app_ils.circulation.utils import resolve_item_from_loan
 from invenio_app_ils.ill.api import BORROWING_REQUEST_PID_TYPE
 from invenio_app_ils.ill.proxies import current_ils_ill
@@ -53,8 +55,8 @@ def index_after_loan_replace_item(_, old_item_pid, new_item_pid):
 
 def send_email_after_loan_change(_, initial_loan, loan, trigger):
     """Send email notification when the loan changes."""
-    send_loan_mail(
+    send_loan_notification(
         action=trigger,
         loan=loan,
-        message_ctx=dict(initial_loan=initial_loan),
+        msg_extra_ctx=dict(initial_loan=initial_loan),
     )

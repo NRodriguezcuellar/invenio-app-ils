@@ -56,6 +56,7 @@ from .jsonresolvers.loan import (
     item_resolver,
     loan_patron_resolver,
 )
+from .notifications.api import circulation_filter_notifications
 from .transitions.transitions import ILSItemOnLoanToItemOnLoan, ILSToItemOnLoan
 from .utils import (
     circulation_build_document_ref,
@@ -81,6 +82,7 @@ ILS_CIRCULATION_MAIL_MSG_CREATOR = (
 )
 #: Notification email for overdue loan sent automatically every X days
 ILS_CIRCULATION_MAIL_OVERDUE_REMINDER_INTERVAL = 3
+ILS_CIRCULATION_NOTIFICATION_OVERDUE_REMINDER_INTERVAL = 3
 #: The maximum duration of a loan request
 ILS_CIRCULATION_LOAN_REQUEST_DURATION_DAYS = 60
 #: Period of time in days, before loans expire, for notifications etc.
@@ -91,6 +93,13 @@ ILS_CIRCULATION_DELIVERY_METHODS = {
     "PICKUP": "Pick it up at the library desk",
     "DELIVERY": "Have it delivered to my office",
 }
+
+# Notification message creator for loan notifications
+ILS_NOTIFICATIONS_MSG_BUILDER_CIRCULATION = "invenio_app_ils.circulation.notifications.messages:notification_loan_msg_builder"  # noqa
+# Function to select and filter which notifications should be sent
+ILS_NOTIFICATIONS_FILTER_CIRCULATION = circulation_filter_notifications
+# Override default circulation templates
+ILS_NOTIFICATIONS_TEMPLATES_CIRCULATION = {}
 
 ###############################################################################
 # CIRCULATION overridden config

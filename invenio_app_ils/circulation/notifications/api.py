@@ -39,10 +39,35 @@ def send_loan_notification(loan, action, msg_extra_ctx=None, **kwargs):
         "ILS_NOTIFICATIONS_MSG_BUILDER_CIRCULATION"
     ]
     builder = obj_or_import_string(func_or_path)
-    MsgBuilder = builder(**kwargs)
-    msg = MsgBuilder.build(loan, action, msg_ctx, **kwargs)
+    msg = builder(loan, action, msg_ctx, **kwargs)
 
     patron = msg_ctx["patron"]
     patrons = [patron]
 
     send_notification(patrons, msg, **kwargs)
+
+
+def send_loan_overdue_reminder_notification(
+    loan, days_ago, is_manually_triggered=False
+):
+    """Send loan overdue email."""
+    send_loan_notification(
+        action="overdue_reminder",
+        loan=loan,
+        is_manually_triggered=is_manually_triggered,
+        message_ctx=dict(days_ago=days_ago),
+    )
+
+
+def send_expiring_loan_reminder_notification(loan, expiring_in_days):
+    """Send reminder email."""
+    send_loan_notification(
+        action="expiring_reminder",
+        loan=loan,
+        message_ctx=dict(expiring_in_days=expiring_in_days),
+    )
+
+
+def circulation_filter_notifications(*args, **kwargs):
+    """Filter notifications to be sent."""
+    return True

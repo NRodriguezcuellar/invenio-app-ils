@@ -38,3 +38,11 @@ def send_document_request_notification(
     patrons = [patron]
 
     send_notification(patrons, msg, **kwargs)
+
+
+def document_request_notification_filter(*args, **kwargs):
+    """Filter notifications.
+
+    Returns if the notification should be sent
+    """
+    return True

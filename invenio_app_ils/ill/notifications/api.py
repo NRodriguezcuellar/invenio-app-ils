@@ -48,3 +48,8 @@ def send_ill_notification(brw_req, action, msg_extra_ctx=None, **kwargs):
     patrons = [patron]
 
     send_notification(patrons, msg, **kwargs)
+
+
+def ill_notifications_filter(*args, **kwargs):
+    """Filter ILL notifications to be sent."""
+    return True
