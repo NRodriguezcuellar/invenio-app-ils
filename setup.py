@@ -67,6 +67,7 @@ install_requires = [
     "invenio-oaiserver>=1.3.0",
     "invenio-pidstore>=1.2.2,<1.3.0",
     "invenio-records-rest>=1.9.0, <1.10.0",
+    "invenio-rest>=1.2.7"
     # Note: Invenio-Records v1.5.x is allowed on purpose in v3.4 to
     # allow the relations support to be released once it's more mature
     # without having to release Invenio v3.5.
